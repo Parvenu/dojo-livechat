@@ -25,7 +25,7 @@ import { WebsocketService } from './services/websocket.service';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' } }], // removing the "hint" section under our mat-input
+  providers: [WebsocketService, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' }}], // removing the "hint" section under our mat-input
 })
 export class AppComponent implements OnInit {
   public pseudoInputCtrl!: FormControl<string>;
@@ -56,6 +56,6 @@ export class AppComponent implements OnInit {
   }
 
   private fetchMessages() {
-    //  this.wsService.webSocketEvents$.subscribe(console.log);
+    this.wsService.webSocketMessages$.subscribe(console.log);
   }
 }
