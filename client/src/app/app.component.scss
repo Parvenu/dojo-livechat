@@ -1,0 +1,12 @@
+.chat {
+  &__messagebox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__message {
+      width: 1000px;
+    }
+  }
+}

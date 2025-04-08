@@ -1,22 +1,30 @@
-<div class='chat__container'>
+<div class="chat__container">
   @for (message of messages$ | async; track $index) {
-  <div class="chat__item">
-    {{message.message}}
-    <mat-divider></mat-divider>
-  </div>
+    <div class="chat__item">
+      @if (message.type === MESSAGE_ENUM.CLIENT_MESSAGE) {
+        {{ message.body.nickname }} :
+      }
+      {{ message.body.message }}
+      <mat-divider></mat-divider>
+    </div>
   }
-  <div class='chat__messagebox'>
-    <mat-form-field>
+  <div class="chat__messagebox">
+    <mat-form-field class="chat__messagebox__nickname">
       <input matInput type="text" [formControl]="pseudoInputCtrl" placeholder="What is your name ?" />
-
     </mat-form-field>
 
-    <mat-form-field class="">
+    <mat-form-field class="chat__messagebox__message">
       <input matInput type="text" [formControl]="messageInputCtrl" placeholder="Post a message !" />
-      <button [disabled]="!messageInputCtrl.value" mat-fab aria-label="Send" (click)="sendMessage()">
-        <mat-icon>send</mat-icon>
-      </button>
     </mat-form-field>
+    <button
+      class="chat__messagebox__message__send-button"
+      [disabled]="!messageInputCtrl.value"
+      mat-fab
+      aria-label="Send"
+      (click)="sendMessage()"
+    >
+      <mat-icon>send</mat-icon>
+    </button>
   </div>
 </div>
 <router-outlet />
